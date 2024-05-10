@@ -16,7 +16,7 @@ export default function FeaturedRow({ title, description, restaurants }) {
                 </TouchableOpacity>
             </View>
             <ScrollView
-                vertival
+                vertical
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 5 }}>
                 {
