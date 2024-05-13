@@ -11,7 +11,6 @@ import {
   Address,
   Notifications,
   Orders,
-  PaymentMethod,
   Profile,
   Search,
 } from "../screens";
@@ -33,15 +32,6 @@ const DrawerNavigation = () => {
                 backgroundColor: COLORS.white,
               }}
             >
-              <Image
-                source={images.avatar}
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 999,
-                  marginBottom: 12,
-                }}
-              />
               <Text
                 style={{
                   fontSize: 18,
@@ -50,7 +40,7 @@ const DrawerNavigation = () => {
                   marginBottom: 6,
                 }}
               >
-                Isabella Joanna
+                Perfil 
               </Text>
               <Text
                 style={{
@@ -58,7 +48,7 @@ const DrawerNavigation = () => {
                   color: COLORS.black,
                 }}
               >
-                Product Designer
+                Correo 
               </Text>
             </View>
             <DrawerItemList {...props} />
@@ -119,18 +109,6 @@ const DrawerNavigation = () => {
         component={Search}
       />
       <Drawer.Screen
-        name="Wishlist"
-        options={{
-          drawerLabel: "Wishlist",
-          title: "Wishlist",
-          headerShadowVisible: false,
-          drawerIcon: () => (
-            <Ionicons name="heart-outline" size={24} color={COLORS.black} />
-          ),
-        }}
-        component={Search}
-      />
-      <Drawer.Screen
         name="Delivery Address"
         options={{
           drawerLabel: "Delivery Address",
@@ -143,22 +121,10 @@ const DrawerNavigation = () => {
         component={Address}
       />
       <Drawer.Screen
-        name="Payment Method"
+        name="Notifiaciones"
         options={{
-          drawerLabel: "Payment Method",
-          title: "Payment Method",
-          headerShadowVisible: false,
-          drawerIcon: () => (
-            <AntDesign name="creditcard" size={24} color={COLORS.black} />
-          ),
-        }}
-        component={PaymentMethod}
-      />
-      <Drawer.Screen
-        name="Notifications"
-        options={{
-          drawerLabel: "Notifications",
-          title: "Notifications",
+          drawerLabel: "Notificaciones",
+          title: "Notificaciones",
           headerShadowVisible: false,
           drawerIcon: () => (
             <Ionicons

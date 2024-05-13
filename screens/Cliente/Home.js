@@ -66,9 +66,7 @@ const Home = ({ navigation }) => {
 
           {/* Botón de carrito */}
           <TouchableOpacity
-            onPress={() => {
-              // Lógica para abrir el carrito
-            }}
+            onPress={() => navigation.navigate("carrito")}
             style={{
               width: 45,
               height: 45,

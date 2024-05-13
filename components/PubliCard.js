@@ -18,8 +18,8 @@ export default function PublicCard({ item }) {
                 <View style={styles.cardContent}>
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.description}>{item.description}</Text>
-                    {/* Si necesitas mostrar el precio, puedes agregarlo aquí */}
-                    {/* <Text style={styles.price}>{item.price}</Text> */}
+                
+                    <Text style={styles.price}>${item.price}</Text> 
                 </View>
             </View>
         </TouchableNativeFeedback>

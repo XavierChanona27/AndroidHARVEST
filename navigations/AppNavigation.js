@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./DrawerNavigation";
-import { Welcome, Login, Signup, Negocios } from "../screens";
+import { Welcome, Login, Signup, Negocios, Carrito } from "../screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +25,20 @@ const AppNavigation = () => {
         <Stack.Screen
           name="Signup"
           component={Signup}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="Negocios"
+          component={Negocios}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="Carrito"
+          component={Carrito}
           options={{
             headerShown: false,
           }}

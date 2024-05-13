@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         overflow: 'hidden', // Para evitar que el texto se salga de la tarjeta
         marginBottom: 10, // Margen inferior entre las tarjetas
+        border : 1,
     },
     cardShadow: {
         shadowRadius: 7,
