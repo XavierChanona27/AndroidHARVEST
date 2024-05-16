@@ -12,7 +12,7 @@ export default function FeaturedRow({ title, description, restaurants }) {
                     <Text style={{ color: "#A0AEC0", fontSize: 12 }}>{description}</Text>
                 </View>
                 <TouchableOpacity>
-                    <Text style={{ color: themeColors.Text, fontWeight: "bold" }}>Todas</Text>
+                    <Text style={{ color: themeColors.Text, fontWeight: "bold" }}    onPress={() => navigation.navigate("Publicaciones")} >Todas</Text>
                 </TouchableOpacity>
             </View>
             <ScrollView

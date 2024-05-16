@@ -6,7 +6,6 @@ import Categories from "../../components/categories";
 import { featured, publicactions } from "../../constants";
 import FeaturedRow from "../../components/featuredRow";
 import PublicacionesRow from "../../components/PublicacionesRow";
-import { themeColors } from "../../theme";
 import * as Icon from "react-native-feather";
 
 const Home = ({ navigation }) => {

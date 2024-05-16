@@ -10,7 +10,7 @@ export default function PublicCard({ item }) {
         <TouchableNativeFeedback
             onPress={() => navigation.navigate('Publicaciones', { ...item })}
         >
-            <View style={styles.cardContainer}>
+            <View style={[styles.cardContainer, styles.cardShadow]}>
                 <Image
                     style={styles.image}
                     source={require('../assets/negocios/negocio1.jpg')} // Cambiamos item.image por una imagen predeterminada
@@ -18,7 +18,6 @@ export default function PublicCard({ item }) {
                 <View style={styles.cardContent}>
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.description}>{item.description}</Text>
-                
                     <Text style={styles.price}>${item.price}</Text> 
                 </View>
             </View>
@@ -31,32 +30,36 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         marginRight: 6,
         backgroundColor: '#fff',
-        ...Platform.select({
-            android: {
-                elevation: 5, // Agregamos elevación solo para Android
-            },
-        }),
+        marginVertical: 10, // Margen vertical
+        overflow: 'hidden', // Para evitar que el texto se salga de la tarjeta
+        marginBottom: 10, // Margen inferior entre las tarjetas
+        borderWidth: 1, // Agregado: borde de la tarjeta
+    },
+    cardShadow: {
+        shadowRadius: 7,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.2,
     },
     image: {
         height: 150,
-        width: 200,
+        width: 250,
         borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        alignSelf: 'center'
+        borderBottomLeftRadius: 30,
     },
     cardContent: {
-        padding: 16
+        padding: 16,
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     description: {
         color: '#888',
-        fontSize: 14
+        fontSize: 14,
+        marginTop: 8, // Margen superior entre el título y la descripción
     },
     price: {
         fontSize: 14,
-        marginTop: 8
+        marginTop: 8,
     }
 });

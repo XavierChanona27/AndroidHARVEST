@@ -10,6 +10,8 @@ import Login from "./Login";
 import Signup  from "./Signup";
 import Negocios from "./Cliente/negocios";  
 import Carrito from "./Cliente/carrito";
+import Publicaciones from "./Cliente/Publicaciones";
+import Negocios2 from "./Cliente/Negocios2";
 
 export {
     Address,
@@ -24,4 +26,6 @@ export {
     Negocios,
     Signup ,
     Carrito ,
+    Publicaciones,
+    Negocios2
 }

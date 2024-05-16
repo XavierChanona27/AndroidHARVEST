@@ -24,6 +24,51 @@ export const categories = [
       name: "Aloe Vera",
       image: require("../assets/Productos/aloevera.png"),
     },
+    {
+      id: 5,
+      name: "Coco",
+      image: require("../assets/Productos/coco.png"),
+    },
+    {
+      id: 6,
+      name: "Kale",
+      image: require("../assets/Productos/kale.png"),
+    },
+    {
+      id: 7,
+      name: "Coliflor",
+      image: require("../assets/Productos/colifror.png"),
+    },
+    {
+      id: 8,
+      name: "Papaya",
+      image: require("../assets/Productos/papaya.png"),
+    },
+    {
+      id: 9,
+      name: "Navo",
+      image: require("../assets/Productos/navo.png"),
+    },
+    {
+      id: 10,
+      name: "Menta",
+      image: require("../assets/Productos/menta.png"),
+    },
+    {
+      id: 11,
+      name: "Pimiento",
+      image: require("../assets/Productos/pimient.png"),
+    },
+    {
+      id: 12,
+      name: "Perejil",
+      image: require("../assets/Productos/perejil.png"),
+    },
+    {
+      id: 13,
+      name: "Pepino dulce",
+      image: require("../assets/Productos/pepinodulce.png"),
+    },
   ];
   
   export const featured = {
@@ -44,14 +89,14 @@ export const categories = [
         productos: [
           {
             id: 1,
-            name: "Producto 1",
-            image: require("../assets/negocios/negocio2.jpg"),
+            name: "Coco",
+            image: require("../assets/Productos/coco.png"),
             price: 10,
             description: "Descripcion del producto 1",
           },
           {
             id: 2,
-            name: "Producto 2",
+            name: "Alcachofa",
             image: require("../assets/Productos/alcachofa.png"),
             price: 20,
             description: "Descripcion del producto 2",
@@ -71,14 +116,14 @@ export const categories = [
         productos: [
           {
             id: 1,
-            name: "Producto 1",
-            image: require("../assets/negocios/negocio2.jpg"),
+            name: "Coco",
+            image: require("../assets/Productos/coco.png"),
             price: 10,
             description: "Descripcion del producto 1",
           },
           {
             id: 2,
-            name: "Producto 2",
+            name: "Alcachofa",
             image: require("../assets/Productos/alcachofa.png"),
             price: 20,
             description: "Descripcion del producto 2",
@@ -98,14 +143,14 @@ export const categories = [
         productos: [
           {
             id: 1,
-            name: "Producto 1",
-            image: require("../assets/negocios/negocio2.jpg"),
+            name: "Coco",
+            image: require("../assets/Productos/coco.png"),
             price: 10,
             description: "Descripcion del producto 1",
           },
           {
             id: 2,
-            name: "Producto 2",
+            name: "Alcachofa",
             image: require("../assets/Productos/alcachofa.png"),
             price: 20,
             description: "Descripcion del producto 2",

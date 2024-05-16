@@ -83,37 +83,39 @@ const Signup = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <View style={{ flex: 1, marginHorizontal: 22 }}>
-        {step === 1 && (
-          <View>
+     <View style={{ paddingHorizontal: 20,  marginTop: 40}}>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            marginVertical: 12,
+            color: COLORS.black,
+          }}
+        >
+          Crear cuenta
+        </Text>
+
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={{ fontSize: 16, color: COLORS.black }}>
+            ¿Ya tengo cuenta?
+          </Text>
+          <Pressable onPress={() => navigation.navigate("Login")}>
             <Text
               style={{
-                fontSize: 22,
+                fontSize: 16,
+                color: COLORS.primary,
                 fontWeight: "bold",
-                marginVertical: 12,
-                color: COLORS.black,
+                marginLeft: 6,
               }}
             >
-              Crear cuenta
+              Iniciar sesión
             </Text>
-
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={{ fontSize: 16, color: COLORS.black }}>
-                ¿Ya tengo cuenta?
-              </Text>
-              <Pressable onPress={() => navigation.navigate("Login")}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: COLORS.primary,
-                    fontWeight: "bold",
-                    marginLeft: 6,
-                  }}
-                >
-                  Iniciar sesión
-                </Text>
-              </Pressable>
-            </View>
+          </Pressable>
+        </View>
+      </View>
+      <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 22 }}>
+        {step === 1 && (
+          <View>
 
             <View style={{ marginBottom: 12 }}>
               <Text
@@ -237,34 +239,6 @@ const Signup = ({ navigation }) => {
 
         {step === 2 && (
           <View>
-            <Text
-              style={{
-                fontSize: 22,
-                fontWeight: "bold",
-                marginVertical: 12,
-                color: COLORS.black,
-              }}
-            >
-              Crear cuenta
-            </Text>
-
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={{ fontSize: 16, color: COLORS.black }}>
-                ¿Ya tengo cuenta?
-              </Text>
-              <Pressable onPress={() => navigation.navigate("Login")}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: COLORS.primary,
-                    fontWeight: "bold",
-                    marginLeft: 6,
-                  }}
-                >
-                  Iniciar sesión
-                </Text>
-              </Pressable>
-            </View>
             <View style={{ marginBottom: 12 }}>
               <Text
                 style={{
@@ -328,77 +302,66 @@ const Signup = ({ navigation }) => {
                     marginVertical: 8,
                   }}
                 >
-                  Birth Date
+                  Fecha de nacimiento
                 </Text>
 
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  {/* Input para el día */}
-                  <TextInput
-                    placeholder="DD"
-                    placeholderTextColor={COLORS.black}
-                    style={{
-                      flex: 0.5,
-                      height: 48,
-                      borderColor: COLORS.black,
-                      borderWidth: 1,
-                      borderRadius: 8,
-                      paddingLeft: 22,
-                      marginRight: 8,
-                      marginBottom: 12, // Margen negro en la parte inferior
-                    }}
-                    value={birthDate}
-                    onChangeText={(text) => setBirthDay(text)}
-                  />
+               <View style={{ flexDirection: "row", alignItems: "center" }}>
+  <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+    {/* Input para el día */}
+    <TextInput
+      placeholder="DD"
+      placeholderTextColor={COLORS.black}
+      style={{
+        flex: 1,
+        height: 48,
+        borderColor: COLORS.black,
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingLeft: 22,
+        marginRight: 8,
+      }}
+      value={birthDate}
+      onChangeText={(text) => setBirthDay(text)}
+    />
+    
+    {/* Selector de mes */}
+    <Picker
+      value={birthMonth}
+      onChange={() => console.log("changed")}
+      style={{
+        
+        height: 48,
+        borderColor: COLORS.black,
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingLeft: 22,
+      }}
+    >
+      <Picker.Item label="Mes" value={null} />
+      {months.map((month, index) => (
+        <Picker.Item key={index} label={month.label} value={month.value} />
+      ))}
+    </Picker>
 
-                  {/* Selector de mes */}
-                  <RNPickerSelect
-                    placeholder={{
-                      label: "Select a month",
-                      value: null,
-                    }}
-                    items={months.map((month) => ({
-                      label: month.label,
-                      value: month.value,
-                    }))}
-                    onValueChange={(value) => setBirthMonth(value)}
-                    value={birthMonth}
-                    useNativeAndroidPickerStyle={false}
-                    textInputProps={{ underlineColorAndroid: "transparent" }}
-                    Icon={() => {
-                      return (
-                        <View
-                          style={{
-                            backgroundColor: "transparent",
-                            borderTopWidth: 7,
-                            borderTopColor: COLORS.black,
-                            borderRightWidth: 7 / 2,
-                            borderRightColor: COLORS.black,
-                            borderLeftWidth: 7 / 2,
-                            borderLeftColor: "transparent",
-                          }}
-                        />
-                      );
-                    }}
-                  />
+    {/* Input para el año */}
+    <TextInput
+      placeholder="YYYY"
+      placeholderTextColor={COLORS.black}
+      style={{
+        flex: 1,
+        height: 48,
+        borderColor: COLORS.black,
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingLeft: 22,
+        marginLeft: 8,
+      }}
+      value={birthYear}
+      onChangeText={(text) => setBirthYear(text)}
+    />
+  </View>
+</View>
 
-                  {/* Input para el año */}
-                  <TextInput
-                    placeholder="YYYY"
-                    placeholderTextColor={COLORS.black}
-                    style={{
-                      flex: 0.5,
-                      height: 48,
-                      borderColor: COLORS.black,
-                      borderWidth: 1,
-                      borderRadius: 8,
-                      paddingLeft: 22,
-                      marginLeft: 8,
-                      marginBottom: 12, // Margen negro en la parte inferior
-                    }}
-                    value={birthYear}
-                    onChangeText={(text) => setBirthYear(text)}
-                  />
-                </View>
               </View>
               <Text
                 style={{
@@ -407,7 +370,7 @@ const Signup = ({ navigation }) => {
                   marginVertical: 8,
                 }}
               >
-                Client Type
+             Tipo de cliente
               </Text>
               <RNPickerSelect
                 placeholder={{ label: "Tipo de cuenta", value: null }}
@@ -459,7 +422,7 @@ const Signup = ({ navigation }) => {
 
             <View style={{ flexDirection: "column", marginTop: 20 }}>
               <Button
-                title="Next"
+                title="Siguente"
                 filled
                 style={{
                   marginBottom: 10,
@@ -469,51 +432,16 @@ const Signup = ({ navigation }) => {
 
               <TouchableOpacity onPress={prevStep}>
                 <Text style={{ color: COLORS.primary, textAlign: "center" }}>
-                  Back
+                  Regresar
                 </Text>
               </TouchableOpacity>
-              <Picker
-                value={birthMonth}
-                placeholder={"Placeholder"}
-                onChange={() => console.log("changed")}
-              >
-                {months.map((value, index) => (
-                  <Picker.Item key={index} value={value.value} />
-                ))}
-              </Picker>
+             
             </View>
           </View>
         )}
         {step === 3 && (
           <View>
-            <Text
-              style={{
-                fontSize: 22,
-                fontWeight: "bold",
-                marginVertical: 12,
-                color: COLORS.black,
-              }}
-            >
-              Crear cuenta
-            </Text>
 
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={{ fontSize: 16, color: COLORS.black }}>
-                ¿Ya tengo cuenta?
-              </Text>
-              <Pressable onPress={() => navigation.navigate("Login")}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: COLORS.primary,
-                    fontWeight: "bold",
-                    marginLeft: 6,
-                  }}
-                >
-                  Iniciar sesión
-                </Text>
-              </Pressable>
-            </View>
 
             <View style={{ marginBottom: 12 }}>
               <Text
@@ -660,14 +588,14 @@ const Signup = ({ navigation }) => {
               <Button
                 title="Registrarme"
                 filled
-                onPress={handleSubmit}
+                onPress={() => navigation.navigate("Main")}
                 style={{
                   marginBottom: 10,
                 }}
               />
               <TouchableOpacity onPress={prevStep}>
                 <Text style={{ color: COLORS.primary, textAlign: "center" }}>
-                  Back
+                  Regresar
                 </Text>
               </TouchableOpacity>
             </View>
