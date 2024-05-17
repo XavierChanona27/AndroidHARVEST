@@ -9,19 +9,20 @@ import {
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import * as Icon from "react-native-feather";
+import CartIcon from "../../components/CartIcon";
+import DishRow from "../../components/dishRow";
+
 
 const Negocios = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
   const negocio = params;
-
-  const addToCart = (producto) => {
-    // Lógica para agregar el producto al carrito
-    console.log("Añadido al carrito:", producto.name);
-    navigation.navigate("Carrito", { productos: [producto] });
-  };
+  
+  
 
   return (
+    <View>
+      <CartIcon />
     <ScrollView>
       <View style={styles.container}>
         <Image style={styles.negocioImage} source={negocio.image} />
@@ -46,22 +47,18 @@ const Negocios = () => {
       </View>
       <View>
         <Text style={styles.productsTitle}>Productos</Text>
+   
+    
+
+      {
+         item.productos.map((productos, index) => <DishRow item={{...productos}} key ={{index}}/>)
+         }
+         
+
       </View>
-      {negocio.productos.map((producto, index) => (
-        <View key={index} style={styles.product}>
-          <Text style={styles.productName}>{producto.name}</Text>
-          <TouchableOpacity
-            style={styles.productImageContainer}
-            onPress={() => addToCart(producto)}
-          >
-            <Image style={styles.productImage} source={producto.image} />
-            <View style={styles.plusButton}>
-              <Icon.PlusCircle width={24} height={24} stroke="#000" />
-            </View>
-          </TouchableOpacity>
-        </View>
-      ))}
+    
     </ScrollView>
+    </View>
   );
 };
 
