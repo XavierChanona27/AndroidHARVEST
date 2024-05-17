@@ -13,16 +13,14 @@ import CartIcon from "../../components/CartIcon";
 import DishRow from "../../components/dishRow";
 
 
-const Negocios = () => {
+const Negocio = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
   const negocio = params;
   
-  
-
   return (
     <View>
-      <CartIcon />
+      <CartIcon/>
     <ScrollView>
       <View style={styles.container}>
         <Image style={styles.negocioImage} source={negocio.image} />
@@ -51,8 +49,8 @@ const Negocios = () => {
     
 
       {
-         item.productos.map((productos, index) => <DishRow item={{...productos}} key ={{index}}/>)
-         }
+         negocio.productos.map((productos, index) => <DishRow item={{...productos}} key ={{index}}/>)
+      }
          
 
       </View>
@@ -148,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Negocios;
+export default Negocio;

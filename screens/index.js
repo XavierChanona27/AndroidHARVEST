@@ -8,7 +8,7 @@ import Search from "./Cliente/Search";
 import Welcome from "./Welcome";
 import Login from "./Login";
 import Signup  from "./Signup";
-import Negocios from "./Cliente/negocios";  
+import Negocio from "./Cliente/negocios";  
 import Carrito from "./Cliente/carrito";
 import Publicaciones from "./Cliente/Publicaciones";
 import Negocios2 from "./Cliente/Negocios2";
@@ -23,7 +23,7 @@ export {
     Search,
     Welcome,
     Login,
-    Negocios,
+    Negocio,
     Signup ,
     Carrito ,
     Publicaciones,

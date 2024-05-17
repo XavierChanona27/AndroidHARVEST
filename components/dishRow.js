@@ -1,35 +1,81 @@
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import * as Icon from 'react-native-feather';
-import { Image } from 'react-native';
 
 export default function DishRow({ item }) {
   return (
-    <View classname="flex-row item-center bg-white p-3 rounded-3x1">
-      <Image source={item.image} style={{ width: 100, height: 100 }} />
-      <View classname="flex-1 ms-3">
-        <View classname="flex-row justify-between">
-          <Text classname="text-lg font-medium">{item.name}</Text>
-          <Text classname="text-gray-500">{item.description}</Text>
-
-
+    <View style={styles.container}>
+      <Image source={item.image} style={styles.image} />
+      <View style={styles.detailsContainer}>
+        <View style={styles.nameDescriptionContainer}>
+          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.description}>{item.description}</Text>
         </View>
-        <View classname="flex-row justify-between">
-          <Text classname="text-lg font-medium">${item.price}</Text>
-          <View classname="flex-row">
-            <TouchableOpacity classname="p-1 rounded-full"
-              Style={{ backgroundColor: '#f1f1f1' }}>
-              <Icon.Minus height={24} width={24} fill="#000" />
+        <View style={styles.priceQuantityContainer}>
+          <Text style={styles.price}>${item.price}</Text>
+          <View style={styles.quantityContainer}>
+            <TouchableOpacity style={styles.quantityButton}>
+              <Icon.Minus height={24} width={24} stroke="green" />
             </TouchableOpacity>
-            <Text classname="p-1">2</Text>
-            <TouchableOpacity classname="p-1 rounded-full"
-              Style={{ backgroundColor: '#f1f1f1' }}>
-              <Icon.Plus height={24} width={24} fill="#000" />
+            <Text style={styles.quantity}>2</Text>
+            <TouchableOpacity style={styles.quantityButton}>
+              <Icon.Plus height={24} width={24} stroke="green" />
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     </View>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    padding: 12,
+    borderRadius: 12,
+  },
+  image: {
+    width: 100,
+    height: 100,
+  },
+  detailsContainer: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  nameDescriptionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  description: {
+    color: '#888888',
+  },
+  priceQuantityContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 8,
+    alignItems: 'center',
+  },
+  price: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  quantityButton: {
+    padding: 8,
+    borderRadius: 16,
+    backgroundColor: '#f1f1f1',
+  },
+  quantity: {
+    marginHorizontal: 8,
+    fontSize: 16,
+  },
+});

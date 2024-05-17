@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./DrawerNavigation";
-import { Welcome, Login, Signup, Negocios} from "../screens";
+import { Welcome, Login, Signup, Negocio } from "../screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +31,7 @@ const AppNavigation = () => {
         />
          <Stack.Screen
           name="Negocios"
-          component={Negocios}
+          component={Negocio}
           options={{
             headerShown: false,
           }}
