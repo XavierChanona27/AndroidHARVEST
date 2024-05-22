@@ -1,4 +1,4 @@
-import Address from "./Cliente/Address";
+
 import Home from "./Cliente/Home";
 import Message from "./Cliente/Message";
 import Notifications from "./Cliente/Notifications";
@@ -14,7 +14,6 @@ import Publicaciones from "./Cliente/Publicaciones";
 import Negocios2 from "./Cliente/Negocios2";
 
 export {
-    Address,
     Home,
     Message,
     Notifications,

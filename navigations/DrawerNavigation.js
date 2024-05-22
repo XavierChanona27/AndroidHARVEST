@@ -8,7 +8,6 @@ import { COLORS, images } from "../constants";
 import { Ionicons, AntDesign, Feather } from "@expo/vector-icons";
 import BottomTabNavigation from "./BottomTabNavigation";
 import {
-  Address,
   Notifications,
   Orders,
   Profile,
@@ -72,6 +71,7 @@ const DrawerNavigation = () => {
         },
       }}
     >
+      
       <Drawer.Screen
         name="Home"
         options={{
@@ -84,6 +84,18 @@ const DrawerNavigation = () => {
         }}
         component={BottomTabNavigation}
       />
+     <Drawer.Screen
+          name="Perfil"
+          options={{
+            drawerLabel: "Perfil",
+            title: "Perfil",
+            headerShadowVisible: false,
+            drawerIcon: () => (
+              <Ionicons name="person-outline" size={24} color={COLORS.black} />
+            ),
+          }}
+          component={Profile}
+        />
       <Drawer.Screen
         name="Orders"
         options={{
@@ -107,18 +119,6 @@ const DrawerNavigation = () => {
           ),
         }}
         component={Search}
-      />
-      <Drawer.Screen
-        name="Delivery Address"
-        options={{
-          drawerLabel: "Delivery Address",
-          title: "Delivery Address",
-          headerShadowVisible: false,
-          drawerIcon: () => (
-            <Ionicons name="location-outline" size={24} color={COLORS.black} />
-          ),
-        }}
-        component={Address}
       />
       <Drawer.Screen
         name="Notifiaciones"
