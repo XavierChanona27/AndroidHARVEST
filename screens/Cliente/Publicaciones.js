@@ -1,8 +1,21 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS, icons } from '../../constants';
+import React, { useState, useCallback, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  TextInput,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { COLORS, icons } from "../../constants";
 import * as Icon from "react-native-feather";
+import { getActivePublications } from "../../services/customer";
+import { useRoute, useNavigation } from "@react-navigation/native";
+
+const NUMBER_OF_ITEMS_TO_FETCH = 10;
 
 // Datos de ejemplo para las publicaciones
 const publicaciones = [
@@ -23,13 +36,45 @@ const publicaciones = [
 ];
 
 const Publicaciones = ({ navigation }) => {
+  const { params } = useRoute();
+  const [search, setSearch] = useState(params?.search || "");
+  const [message, setMessage] = useState("");
+  const [offset, setOffset] = useState(NUMBER_OF_ITEMS_TO_FETCH);
+  const [publicaciones, setPublicaciones] = React.useState([]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const onSearch = () => {
+    if (search === "") return;
+    window.history.pushState({}, "", `?search=${search}`);
+    window.location.reload();
+  };
+
+  const loadMorePublications = useCallback(async () => {
+    const newPublications = await getActivePublications(
+      offset,
+      NUMBER_OF_ITEMS_TO_FETCH,
+      search
+    );
+
+    if (!newPublications) return setMessage("No se encontraron publicaciones");
+    setPublicaciones((prev) => [...prev, ...newPublications]);
+    setOffset((prev) => prev + NUMBER_OF_ITEMS_TO_FETCH);
+  }, [offset, search]);
+
+  useEffect(() => {
+    loadMorePublications();
+  }, [loadMorePublications]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         {/* Barra de navegación */}
         <View style={styles.navigationBar}>
           {/* Icono del menú */}
-         <TouchableOpacity
+          <TouchableOpacity
             onPress={() => navigation.toggleDrawer()}
             style={{
               height: 45,
@@ -37,20 +82,19 @@ const Publicaciones = ({ navigation }) => {
               borderRadius: 999,
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: COLORS.gray
+              backgroundColor: COLORS.gray,
             }}
           >
             <Image
               source={icons.menu}
-              resizeMode='contain'
+              resizeMode="contain"
               style={{
                 height: 24,
                 width: 24,
-                tintColor: COLORS.black
+                tintColor: COLORS.black,
               }}
             />
           </TouchableOpacity>
-
 
           {/* Barra de búsqueda */}
           <View style={styles.searchBar}>
@@ -70,11 +114,11 @@ const Publicaciones = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <ScrollView
+        {/* <ScrollView
           showVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollViewContent}
         >
-          {/* Publicaciones */}
+          {/* Publicaciones 
           <View style={styles.publicacionesContainer}>
             {publicaciones.map((publicacion) => (
               <View key={publicacion.id} style={styles.card}>
@@ -83,12 +127,31 @@ const Publicaciones = ({ navigation }) => {
                   style={styles.cardImage}
                 />
                 <Text style={styles.cardTitle}>{publicacion.nombre}</Text>
-                <Text style={styles.cardDescription}>{publicacion.descripcion}</Text>
+                <Text style={styles.cardDescription}>
+                  {publicacion.descripcion}
+                </Text>
                 <Text style={styles.cardPrice}>{publicacion.precio}</Text>
               </View>
             ))}
           </View>
-        </ScrollView>
+        </ScrollView> */}
+
+        <View style={styles.publicacionesContainer}>
+          <FlatList
+            data={publicaciones}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View key={item.id} style={styles.card}>
+                <Image source={{ uri: item.imagen }} style={styles.cardImage} />
+                <Text style={styles.cardTitle}>{item.nombre}</Text>
+                <Text style={styles.cardDescription}>{item.descripcion}</Text>
+                <Text style={styles.cardPrice}>{item.precio}</Text>
+              </View>
+            )}
+            onEndReached={loadMorePublications}
+            onEndReachedThreshold={0.1}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -105,9 +168,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   navigationBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
   menuButton: {
@@ -155,21 +218,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
     elevation: 5,
   },
   cardImage: {
-    width: '100%',
+    width: "100%",
     height: 150,
     borderRadius: 8,
     marginBottom: 12,
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
   },
   cardDescription: {
@@ -179,7 +242,7 @@ const styles = StyleSheet.create({
   },
   cardPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: COLORS.primary,
   },
 });

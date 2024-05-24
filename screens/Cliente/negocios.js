@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -11,51 +11,63 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import * as Icon from "react-native-feather";
 import CartIcon from "../../components/CartIcon";
 import DishRow from "../../components/dishRow";
-
+import { getPorductsByStore } from "../../services/customer";
 
 const Negocio = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
   const negocio = params;
-  
+
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getPorductsByStore(negocio.id_negocio)
+      .then((data) => setProductos(data))
+      .then(() => setIsLoading(false));
+  }, []);
+
   return (
     <View>
-      <CartIcon/>
-    <ScrollView>
-      <View style={styles.container}>
-        <Image style={styles.negocioImage} source={negocio.image} />
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        >
-          <Icon.ArrowLeft height={24} width={24} stroke="#fff" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.negocioInfoContainer}>
-        <Text style={styles.negocioTitle}>{negocio.name}</Text>
-        <View style={styles.negocioInfo}>
-          <Text>
-            Categoria: <Text style={styles.category}>{negocio.category}</Text>
-          </Text>
-          <Text>Dirección: {negocio.address}</Text>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.rating}>{negocio.starts}</Text>
+      <CartIcon />
+      <ScrollView>
+        <View style={styles.container}>
+          <Image
+            style={styles.negocioImage}
+            source={{ uri: negocio.images_negocio[0] }}
+          />
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+          >
+            <Icon.ArrowLeft height={24} width={24} stroke="#fff" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.negocioInfoContainer}>
+          <Text style={styles.negocioTitle}>{negocio.nombre_negocio}</Text>
+          <View style={styles.negocioInfo}>
+            <Text>
+              Descripción:{" "}
+              <Text style={styles.category}>{negocio.descripcion_negocio}</Text>
+            </Text>
+            <Text>Dirección: {negocio.direccion_negocio}</Text>
+            {/* <View style={styles.ratingContainer}>
+              <Text style={styles.rating}>{negocio.starts}</Text>
+            </View> */}
           </View>
         </View>
-      </View>
-      <View>
-        <Text style={styles.productsTitle}>Productos</Text>
-   
-    
+        <View>
+          <Text style={styles.productsTitle}>Productos</Text>
 
-      {
-         negocio.productos.map((productos, index) => <DishRow item={{...productos}} key ={{index}}/>)
-      }
-         
-
-      </View>
-    
-    </ScrollView>
+          {isLoading ? (
+            <Text>Cargando...</Text>
+          ) : (
+            productos.map((producto) => (
+              <DishRow key={producto.id_lote} item={producto} />
+            ))
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -111,7 +123,8 @@ const styles = StyleSheet.create({
   productsTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 30,
+    marginVertical: 20,
+    marginLeft: 20,
   },
   product: {
     flexDirection: "row",

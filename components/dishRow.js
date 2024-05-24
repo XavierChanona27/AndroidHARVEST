@@ -1,18 +1,20 @@
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import React from 'react';
-import * as Icon from 'react-native-feather';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import React from "react";
+import * as Icon from "react-native-feather";
 
 export default function DishRow({ item }) {
   return (
     <View style={styles.container}>
-      <Image source={item.image} style={styles.image} />
+      <Image
+        source={{ uri: item.producto.imagen_producto }}
+        style={styles.image}
+      />
       <View style={styles.detailsContainer}>
         <View style={styles.nameDescriptionContainer}>
-          <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.description}>{item.description}</Text>
+          <Text style={styles.name}>{item.producto.nombre_producto}</Text>
         </View>
         <View style={styles.priceQuantityContainer}>
-          <Text style={styles.price}>${item.price}</Text>
+          <Text style={styles.price}>${item.precio_kg}</Text>
           <View style={styles.quantityContainer}>
             <TouchableOpacity style={styles.quantityButton}>
               <Icon.Minus height={24} width={24} stroke="green" />
@@ -30,9 +32,9 @@ export default function DishRow({ item }) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
     padding: 12,
     borderRadius: 12,
   },
@@ -45,34 +47,34 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   nameDescriptionContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   description: {
-    color: '#888888',
+    color: "#888888",
   },
   priceQuantityContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   price: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   quantityButton: {
     padding: 8,
     borderRadius: 16,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: "#f1f1f1",
   },
   quantity: {
     marginHorizontal: 8,

@@ -30,7 +30,7 @@ const AppNavigation = () => {
           }}
         />
          <Stack.Screen
-          name="Negocios"
+          name="Negocio"
           component={Negocio}
           options={{
             headerShown: false,
@@ -51,7 +51,7 @@ const AppNavigation = () => {
           }}
         />
           <Stack.Screen
-          name="Negocios2"
+          name="Negocios"
           component={Negocios2}
           options={{
             headerShown: false,

@@ -1,26 +1,53 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS, icons } from '../../constants';
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  TextInput,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { COLORS, icons } from "../../constants";
 import Categories from "../../components/categories";
 import { featured, publicactions } from "../../constants";
 import FeaturedRow from "../../components/featuredRow";
 import PublicacionesRow from "../../components/PublicacionesRow";
 import * as Icon from "react-native-feather";
+import { getActivePublications, getActiveStores } from "../../services/customer";
 
 const Home = ({ navigation }) => {
+  const [publications, setPublications] = React.useState([]);
+  const [stores, setStores] = React.useState([]);
+
+  React.useEffect(() => {
+    getActivePublications(0, 10, "").then((data) => setPublications(data));
+    getActiveStores().then((data) => setStores(data));
+  }, []);
+  
   return (
-    <SafeAreaView style={{
-      flex: 1,
-      backgroundColor: COLORS.white
-    }}>
-      <View style={{
+    <SafeAreaView
+      style={{
         flex: 1,
         backgroundColor: COLORS.white,
-        padding: 16
-      }}>
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: COLORS.white,
+          padding: 16,
+        }}
+      >
         {/* Barra de navegación */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          }}
+        >
           {/* Icono del menú */}
           <TouchableOpacity
             onPress={() => navigation.toggleDrawer()}
@@ -30,16 +57,16 @@ const Home = ({ navigation }) => {
               borderRadius: 999,
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: COLORS.gray
+              backgroundColor: COLORS.gray,
             }}
           >
             <Image
               source={icons.menu}
-              resizeMode='contain'
+              resizeMode="contain"
               style={{
                 height: 24,
                 width: 24,
-                tintColor: COLORS.black
+                tintColor: COLORS.black,
               }}
             />
           </TouchableOpacity>
@@ -91,7 +118,7 @@ const Home = ({ navigation }) => {
             <PublicacionesRow
               title={publicactions.title}
               description={publicactions.description}
-              publicaciones={publicactions.publicaciones}
+              publicaciones={publications}
             />
           </View>
 
@@ -100,13 +127,13 @@ const Home = ({ navigation }) => {
             <FeaturedRow
               title={featured.title}
               description={featured.description}
-              restaurants={featured.restaurants}
+              stores={stores}
             />
           </View>
         </ScrollView>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default Home;
