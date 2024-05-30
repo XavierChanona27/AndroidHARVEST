@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather'; // Suponiendo que usas Feather icons
+import Feather from 'react-native-vector-icons/Feather'; // Asegúrate de importar Feather correctamente
 import { useNavigation } from '@react-navigation/native';
 
 const Carrito = () => {
   const navigation = useNavigation();
+  const [count, setCount] = useState(1);
+
+  const add = (factor) => {
+    const updatedCount = count + factor;
+    if (updatedCount >= 0) {
+      setCount(updatedCount);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="#fff" />
+          <Feather name="arrow-left" size={24} color="#fff" />
         </TouchableOpacity>
         <View>
           <Text style={styles.title}>Carrito</Text>
@@ -19,24 +28,27 @@ const Carrito = () => {
       {/* Orden */}
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.productContainer}>
-          <View style={styles.productInfo}>
-            <Image 
-              source={{uri: 'https://via.placeholder.com/100'}}
-              style={styles.productImage}
-            />
-            <View>
-              <Text style={styles.productText}>Producto 1</Text>
-              <Text style={styles.productText}>x1</Text>
+          <Image 
+            source={{uri: 'https://via.placeholder.com/100'}}
+            style={styles.productImage}
+          />
+          <View style={styles.detailsContainer}>
+            <Text style={styles.productText}>Producto 1</Text>
+            <Text style={styles.price}>$50.00</Text>
+            <View style={styles.quantityContainer}>
+              <TouchableOpacity style={styles.quantityButton} onPress={() => add(-1)}>
+                <Feather name="minus" size={24} color="green" />
+              </TouchableOpacity>
+              <Text style={styles.quantity}>{count}</Text>
+              <TouchableOpacity style={styles.quantityButton} onPress={() => add(1)}>
+                <Feather name="plus" size={24} color="green" />
+              </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.productText}>$50.00</Text>
-          <TouchableOpacity style={styles.removeButton}>
-            <Icon name="minus" size={24} color="#fff" />
-          </TouchableOpacity>
         </View>
       </ScrollView>
       <View style={styles.footer}>
-        <Text style={styles.totalText}>Total: $50.00</Text>
+        <Text style={styles.totalText}>Total: ${50 * count}.00</Text>
         <TouchableOpacity style={styles.payButton}>
           <Text style={styles.payButtonText}>Ir a chat</Text>
         </TouchableOpacity>
@@ -85,28 +97,42 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: "#ffffff",
+    padding: 12,
+    borderRadius: 12,
     marginBottom: 16,
   },
-  productInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   productImage: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  detailsContainer: {
+    flex: 1,
+    marginLeft: 12,
   },
   productText: {
     fontSize: 18,
     fontWeight: 'bold',
   },
-  removeButton: {
-    backgroundColor: 'green', // Changed to green
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
+  price: {
+    fontSize: 16,
+    color: "#888888",
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  quantityButton: {
+    padding: 8,
+    borderRadius: 16,
+    backgroundColor: "#f1f1f1",
+  },
+  quantity: {
+    marginHorizontal: 8,
+    fontSize: 16,
   },
   footer: {
     backgroundColor: 'white',

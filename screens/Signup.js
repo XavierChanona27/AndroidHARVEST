@@ -237,208 +237,193 @@ const Signup = ({ navigation }) => {
           </View>
         )}
 
-        {step === 2 && (
-          <View>
-            <View style={{ marginBottom: 12 }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: 400,
-                  marginVertical: 8,
-                }}
-              >
-                Nombre(s)
-              </Text>
+{step === 2 && (
+        <View>
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                marginVertical: 8,
+              }}
+            >
+              Nombre(s)
+            </Text>
+            <TextInput
+              placeholder="Ingresa tu nombre(s)"
+              placeholderTextColor={COLORS.black}
+              style={{
+                width: '100%',
+                height: 48,
+                borderColor: COLORS.black,
+                borderWidth: 1,
+                borderRadius: 8,
+                paddingLeft: 22,
+              }}
+              value={name}
+              onChangeText={setName}
+            />
+          </View>
 
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                marginVertical: 8,
+              }}
+            >
+              Apellido(s)
+            </Text>
+            <TextInput
+              placeholder="Ingresa tu apellido(s)"
+              placeholderTextColor={COLORS.black}
+              style={{
+                width: '100%',
+                height: 48,
+                borderColor: COLORS.black,
+                borderWidth: 1,
+                borderRadius: 8,
+                paddingLeft: 22,
+              }}
+              value={lastName}
+              onChangeText={setLastName}
+            />
+          </View>
+
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                marginVertical: 8,
+              }}
+            >
+              Fecha de nacimiento
+            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
               <TextInput
-                placeholder="Ingresa tu nombre(s)"
+                placeholder="DD"
                 placeholderTextColor={COLORS.black}
                 style={{
-                  width: "100%",
+                  flex: 1,
+                  height: 48,
+                  borderColor: COLORS.black,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  paddingLeft: 10,
+                  marginRight: 8,
+                }}
+                value={birthDate}
+                onChangeText={setBirthDay}
+              />
+              <Picker
+                selectedValue={birthMonth}
+                onValueChange={(itemValue) => setBirthMonth(itemValue)}
+                style={{
+                  flex: 1,
+                  height: 48,
+                  borderColor: COLORS.black,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  marginRight: 8,
+                }}
+              >
+                <Picker.Item label="Mes" value={null} />
+                {months.map((month) => (
+                  <Picker.Item key={month.value} label={month.label} value={month.value} />
+                ))}
+              </Picker>
+              <TextInput
+                placeholder="YYYY"
+                placeholderTextColor={COLORS.black}
+                style={{
+                  flex: 1,
                   height: 48,
                   borderColor: COLORS.black,
                   borderWidth: 1,
                   borderRadius: 8,
                   paddingLeft: 22,
                 }}
-                value={name}
-                onChangeText={(text) => setName(text)}
+                value={birthYear}
+                onChangeText={setBirthYear}
               />
-            </View>
-
-            <View style={{ marginBottom: 12 }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: 400,
-                  marginVertical: 8,
-                }}
-              >
-                Apellido(s)
-              </Text>
-
-              <TextInput
-                placeholder="Ingresa tu apellido(s)"
-                placeholderTextColor={COLORS.black}
-                style={{
-                  width: "100%",
-                  height: 48,
-                  borderColor: COLORS.black,
-                  borderWidth: 1,
-                  borderRadius: 8,
-                  paddingLeft: 22,
-                }}
-                value={lastName}
-                onChangeText={(text) => setLastName(text)}
-              />
-            </View>
-
-            <View style={{ marginBottom: 12 }}>
-              <View style={{ marginBottom: 12 }}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 400,
-                    marginVertical: 8,
-                  }}
-                >
-                  Fecha de nacimiento
-                </Text>
-
-               <View style={{ flexDirection: "row", alignItems: "center" }}>
-  <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-    {/* Input para el día */}
-    <TextInput
-      placeholder="DD"
-      placeholderTextColor={COLORS.black}
-      style={{
-        flex: 1,
-        height: 48,
-        borderColor: COLORS.black,
-        borderWidth: 1,
-        borderRadius: 8,
-        paddingLeft: 22,
-        marginRight: 8,
-      }}
-      value={birthDate}
-      onChangeText={(text) => setBirthDay(text)}
-    />
-    
-    {/* Selector de mes */}
-    <Picker
-      value={birthMonth}
-      onChange={() => console.log("changed")}
-      style={{
-        
-        height: 48,
-        borderColor: COLORS.black,
-        borderWidth: 1,
-        borderRadius: 8,
-        paddingLeft: 22,
-      }}
-    >
-      <Picker.Item label="Mes" value={null} />
-      {months.map((month, index) => (
-        <Picker.Item key={index} label={month.label} value={month.value} />
-      ))}
-    </Picker>
-
-    {/* Input para el año */}
-    <TextInput
-      placeholder="YYYY"
-      placeholderTextColor={COLORS.black}
-      style={{
-        flex: 1,
-        height: 48,
-        borderColor: COLORS.black,
-        borderWidth: 1,
-        borderRadius: 8,
-        paddingLeft: 22,
-        marginLeft: 8,
-      }}
-      value={birthYear}
-      onChangeText={(text) => setBirthYear(text)}
-    />
-  </View>
-</View>
-
-              </View>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: 400,
-                  marginVertical: 8,
-                }}
-              >
-             Tipo de cliente
-              </Text>
-              <RNPickerSelect
-                placeholder={{ label: "Tipo de cuenta", value: null }}
-                items={clientTypes}
-                onValueChange={(value) => setClientType(value)}
-                style={{
-                  inputAndroid: {
-                    width: "100%",
-                    height: 48,
-                    borderColor: COLORS.black,
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    paddingLeft: 22,
-                    color: COLORS.black, // Color del texto
-                  },
-                  iconContainer: {
-                    color: COLORS.black,
-                    top: 15, // Ajuste menor para el icono
-                    right: 15,
-                  },
-                  placeholder: {
-                    // Placeholder sin color
-                    color: COLORS.black,
-                    fontSize: 16, // Ajuste menor para el tamaño del placeholder
-                    fontWeight: "normal", // Ajuste menor para el peso del placeholder
-                  },
-                }}
-                value={clientType}
-                useNativeAndroidPickerStyle={false}
-                textInputProps={{ underlineColorAndroid: "transparent" }}
-                Icon={() => {
-                  return (
-                    <View
-                      style={{
-                        backgroundColor: "transparent",
-                        borderTopWidth: 7,
-                        borderTopColor: "black",
-                        borderRightWidth: 7,
-                        borderRightColor: "black",
-                        borderLeftWidth: 7,
-                        borderLeftColor: "transparent",
-                        fontWeight: "bold", // Negrita para el icono
-                      }}
-                    />
-                  );
-                }}
-              />
-            </View>
-
-            <View style={{ flexDirection: "column", marginTop: 20 }}>
-              <Button
-                title="Siguente"
-                filled
-                style={{
-                  marginBottom: 10,
-                }}
-                onPress={nextStep}
-              />
-
-              <TouchableOpacity onPress={prevStep}>
-                <Text style={{ color: COLORS.primary, textAlign: "center" }}>
-                  Regresar
-                </Text>
-              </TouchableOpacity>
-             
             </View>
           </View>
-        )}
+
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                marginVertical: 8,
+              }}
+            >
+              Tipo de cliente
+            </Text>
+            <RNPickerSelect
+              placeholder={{ label: 'Tipo de cuenta', value: null }}
+              items={clientTypes}
+              onValueChange={(value) => setClientType(value)}
+              style={{
+                inputAndroid: {
+                  width: '100%',
+                  height: 48,
+                  borderColor: COLORS.black,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  paddingLeft: 22,
+                  color: COLORS.black, // Color del texto
+                },
+                iconContainer: {
+                  top: 15, // Ajuste menor para el icono
+                  right: 15,
+                },
+                placeholder: {
+                  color: COLORS.black,
+                  fontSize: 16, // Ajuste menor para el tamaño del placeholder
+                  fontWeight: 'normal', // Ajuste menor para el peso del placeholder
+                },
+              }}
+              value={clientType}
+              useNativeAndroidPickerStyle={false}
+              textInputProps={{ underlineColorAndroid: 'transparent' }}
+              Icon={() => {
+                return (
+                  <View
+                    style={{
+                      backgroundColor: 'transparent',
+                      borderTopWidth: 7,
+                      borderTopColor: 'black',
+                      borderRightWidth: 7,
+                      borderRightColor: 'black',
+                      borderLeftWidth: 7,
+                      borderLeftColor: 'transparent',
+                      fontWeight: 'bold', // Negrita para el icono
+                    }}
+                  />
+                );
+              }}
+            />
+          </View>
+
+          <View style={{ flexDirection: 'column', marginTop: 20 }}>
+            <Button
+              title="Siguiente"
+              filled
+              style={{
+                marginBottom: 10,
+              }}
+              onPress={nextStep}
+            />
+            <TouchableOpacity onPress={prevStep}>
+              <Text style={{ color: COLORS.primary, textAlign: 'center' }}>
+                Regresar
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
         {step === 3 && (
           <View>
 
@@ -662,7 +647,10 @@ const Signup = ({ navigation }) => {
         </View>
       </View>
     </SafeAreaView>
+    
   );
+  
 };
+
 
 export default Signup;
