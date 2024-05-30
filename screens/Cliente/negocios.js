@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ActivityIndicator
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import * as Icon from "react-native-feather";
@@ -51,16 +52,20 @@ const Negocio = () => {
               <Text style={styles.category}>{negocio.descripcion_negocio}</Text>
             </Text>
             <Text>Dirección: {negocio.direccion_negocio}</Text>
-            {/* <View style={styles.ratingContainer}>
-              <Text style={styles.rating}>{negocio.starts}</Text>
-            </View> */}
           </View>
         </View>
-        <View>
+        <View style={styles.productsContainer}>
           <Text style={styles.productsTitle}>Productos</Text>
 
           {isLoading ? (
-            <Text>Cargando...</Text>
+            <View style={{ 
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#ffffff',
+             }} >
+             <ActivityIndicator size="small" color="#0000ff" />
+            </View>
           ) : (
             productos.map((producto) => (
               <DishRow key={producto.id_lote} item={producto} />
@@ -106,14 +111,6 @@ const styles = StyleSheet.create({
   negocioInfo: {
     marginBottom: 10,
   },
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  rating: {
-    color: "#34D399",
-    marginRight: 5,
-  },
   productsContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
@@ -125,37 +122,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 20,
     marginLeft: 20,
-  },
-  product: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 10,
-    position: "relative",
-    backgroundColor: "#fff",
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    overflow: "hidden",
-  },
-  productName: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  productImageContainer: {
-    position: "relative",
-  },
-  productImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-  },
-  plusButton: {
-    position: "absolute",
-    bottom: 5,
-    right: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    borderRadius: 20,
-    padding: 5,
   },
 });
 

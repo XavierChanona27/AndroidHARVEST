@@ -1,8 +1,17 @@
 import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import * as Icon from "react-native-feather";
 
 export default function DishRow({ item }) {
+  const [count, setCount] = useState(0);
+
+  const add = (factor) => {
+    const updatedCount = count + factor;
+    if (updatedCount >= 0) {
+      setCount(updatedCount);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -10,21 +19,23 @@ export default function DishRow({ item }) {
         style={styles.image}
       />
       <View style={styles.detailsContainer}>
-        <View style={styles.nameDescriptionContainer}>
-          <Text style={styles.name}>{item.producto.nombre_producto}</Text>
+        <Text style={styles.name}>{item.producto.nombre_producto}</Text>
+        <Text style={styles.stock}>Quedan {item.producto.stock} Kg</Text>
+        <Text style={styles.price}>${item.precio_kg} por Kg</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <View style={styles.quantityContainer}>
+          <TouchableOpacity style={styles.quantityButton} onPress={() => add(-1)}>
+            <Icon.Minus height={24} width={24} stroke="blue" />
+          </TouchableOpacity>
+          <Text style={styles.quantity}>{count}</Text>
+          <TouchableOpacity style={styles.quantityButton} onPress={() => add(1)}>
+            <Icon.Plus height={24} width={24} stroke="blue" />
+          </TouchableOpacity>
         </View>
-        <View style={styles.priceQuantityContainer}>
-          <Text style={styles.price}>${item.precio_kg}</Text>
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity style={styles.quantityButton}>
-              <Icon.Minus height={24} width={24} stroke="green" />
-            </TouchableOpacity>
-            <Text style={styles.quantity}>2</Text>
-            <TouchableOpacity style={styles.quantityButton}>
-              <Icon.Plus height={24} width={24} stroke="green" />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>Agregar a bolsa</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -37,39 +48,42 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 12,
     borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    marginRight: 12,
   },
   detailsContainer: {
     flex: 1,
-    marginLeft: 12,
-  },
-  nameDescriptionContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
   },
-  description: {
+  stock: {
+    fontSize: 14,
     color: "#888888",
-  },
-  priceQuantityContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 8,
-    alignItems: "center",
+    marginTop: 4,
   },
   price: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    color: "#888888",
+    marginTop: 4,
+  },
+  buttonContainer: {
+    justifyContent: "center",
   },
   quantityContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 8,
+    justifyContent: "center",
   },
   quantityButton: {
     padding: 8,
@@ -78,6 +92,17 @@ const styles = StyleSheet.create({
   },
   quantity: {
     marginHorizontal: 8,
+    fontSize: 16,
+  },
+  addButton: {
+    backgroundColor: "#00BFFF",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 16,
+    alignItems: "center",
+  },
+  addButtonText: {
+    color: "#ffffff",
     fontSize: 16,
   },
 });

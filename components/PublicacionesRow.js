@@ -1,7 +1,6 @@
-// PublicacionesRow.js
 import React from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"; 
 import { themeColors } from "../theme";
 import PublicCard from "./PubliCard";
 
@@ -10,7 +9,7 @@ export default function PublicacionesRow({
   description,
   publicaciones,
 }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); 
 
   return (
     <View>
@@ -26,7 +25,6 @@ export default function PublicacionesRow({
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>{title}</Text>
           <Text style={{ color: "#A0AEC0", fontSize: 12 }}>{description}</Text>
         </View>
-        {/* En el botón "Todas", agregamos onPress para navegar a la pantalla Publicaciones */}
         <TouchableOpacity onPress={() => navigation.navigate("Publicaciones")}>
           <Text style={{ color: themeColors.Text, fontWeight: "bold" }}>
             Todas
@@ -38,9 +36,15 @@ export default function PublicacionesRow({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 5 }}
       >
-        {publicaciones.map((publicacion, index) => (
-          <PublicCard item={publicacion} key={index} />
-        ))}
+        {Array.isArray(publicaciones) && publicaciones.length > 0 ? (
+          publicaciones.map((publicacion, index) => (
+            <PublicCard item={publicacion} key={index} />
+          ))
+        ) : (
+          <Text style={{ paddingHorizontal: 16, color: "#A0AEC0" }}>
+            No hay publicaciones disponibles.
+          </Text>
+        )}
       </ScrollView>
     </View>
   );

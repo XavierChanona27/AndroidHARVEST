@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,14 +17,14 @@ import * as Icon from "react-native-feather";
 import { getActivePublications, getActiveStores } from "../../services/customer";
 
 const Home = ({ navigation }) => {
-  const [publications, setPublications] = React.useState([]);
-  const [stores, setStores] = React.useState([]);
+  const [publications, setPublications] = useState([]); // Estado inicial como array vacío
+  const [stores, setStores] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getActivePublications(0, 10, "").then((data) => setPublications(data));
     getActiveStores().then((data) => setStores(data));
   }, []);
-  
+
   return (
     <SafeAreaView
       style={{
